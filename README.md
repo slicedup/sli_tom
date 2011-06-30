@@ -1,0 +1,2 @@
+#Slicedup Template Object Mapper
+__Version__: 0.1 (development)
