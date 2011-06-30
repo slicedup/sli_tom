@@ -228,6 +228,7 @@ class Node extends \lithium\util\Collection {
 		if (isset($this->_data[$index])) {
 			return $this->_insert($element, ++$index);
 		}
+		return $this->addChild($element, $index);
 	}
 
 	/**
@@ -244,7 +245,7 @@ class Node extends \lithium\util\Collection {
 		if (isset($this->_data[$index])) {
 			return $this->_insert($element, $index);
 		}
-		return false;
+		return $this->addChild($element, $index);
 	}
 
 	/**
