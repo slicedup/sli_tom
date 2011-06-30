@@ -28,7 +28,7 @@ class Element extends \lithium\template\Helper {
 		return $element->render();
 	}
 
-	public function string($string, $params, array $options = array()) {
+	public function string($string, $params = array(), array $options = array()) {
 		return $this->_render(__METHOD__, $string, $params, $options);
 	}
 
