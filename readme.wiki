@@ -1,2 +1,5 @@
-Slicedup Template Object Mapper
-===============================
+#Slicedup Template Object Mapper
+
+**Version:** 
+
+* 0.1 (development)
