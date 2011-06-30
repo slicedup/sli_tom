@@ -6,14 +6,14 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\tests\cases\template;
+namespace sli_tom\tests\cases\template;
 
-use sli_dom\template\Element;
-use sli_dom\template\element\Literal;
-use sli_dom\template\element\Html;
-use sli_dom\template\element\html\Image;
+use sli_tom\template\Element;
+use sli_tom\template\element\Literal;
+use sli_tom\template\element\Html;
+use sli_tom\template\element\html\Image;
 
-class ElementTest extends \sli_dom\tests\cases\template\ElementBaseTest {
+class ElementTest extends \sli_tom\tests\cases\template\ElementBaseTest {
 
 	public function testCreate() {
 		$element1 = new Element();

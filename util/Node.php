@@ -6,7 +6,7 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\util;
+namespace sli_tom\util;
 
 use lithium\util\Collection;
 
@@ -49,7 +49,7 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Parent Node
 	 *
-	 * @var \sli_dom\util\Node
+	 * @var \sli_tom\util\Node
 	 */
 	protected $_parent = null;
 
@@ -83,7 +83,7 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Get root node of Node's tree.
 	 *
-	 * @return \sli_dom\util\Node
+	 * @return \sli_tom\util\Node
 	 */
 	public function root() {
 		if ($parents = $this->parents()) {
@@ -97,7 +97,7 @@ class Node extends \lithium\util\Collection {
 	 * matches, startng rom the current node back to the root node.
 	 *
 	 * @param callback $filter
-	 * @return \sli_dom\util\Node
+	 * @return \sli_tom\util\Node
 	 */
 	public function parent($filter = null) {
 		if ($filter && $this->_parent) {
@@ -130,10 +130,10 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Set parent node
 	 *
-	 * @param \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
 	 * return null
 	 */
-	public function setParent(\sli_dom\util\Node $element = null) {
+	public function setParent(\sli_tom\util\Node $element = null) {
 		$this->_parent = $element;
 		if ($element && $element->indexOf($this) === false) {
 			$element->addChild($this);
@@ -154,7 +154,7 @@ class Node extends \lithium\util\Collection {
 	 * applied, or forwards the collection and returns the last value.
 	 *
 	 * @param callback $filter
-	 * @return mixed null or \sli_dom\util\Node
+	 * @return mixed null or \sli_tom\util\Node
 	 */
 	public function last($filter = null) {
 		if (!$filter) {
@@ -173,7 +173,7 @@ class Node extends \lithium\util\Collection {
 	 * zero indexed key.
 	 *
 	 * @param int $position numeric position of child node
-	 * @return mixed null or \sli_dom\util\Node
+	 * @return mixed null or \sli_tom\util\Node
 	 */
 	public function nth($position) {
 		if (!$position) {
@@ -196,11 +196,11 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Add child node.
 	 *
-	 * @param \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
 	 * @param mixed $index
-	 * @return mixed null or \sli_dom\util\Node $element
+	 * @return mixed null or \sli_tom\util\Node $element
 	 */
-	public function addChild(\sli_dom\util\Node &$element, $index = null) {
+	public function addChild(\sli_tom\util\Node &$element, $index = null) {
 		if ($this->_final) {
 			return;
 		}
@@ -218,10 +218,10 @@ class Node extends \lithium\util\Collection {
 	 * Add child node after an existing child node
 	 *
 	 * @param mixed $index
-	 * @param \sli_dom\util\Node $element
-	 * @return mixed null or \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
+	 * @return mixed null or \sli_tom\util\Node $element
 	 */
-	public function addAfter($index, \sli_dom\util\Node &$element) {
+	public function addAfter($index, \sli_tom\util\Node &$element) {
 		if (is_object($index)) {
 			$index = $this->indexOf($index);
 		}
@@ -235,10 +235,10 @@ class Node extends \lithium\util\Collection {
 	 * Add child node before an existing child node
 	 *
 	 * @param mixed $index
-	 * @param \sli_dom\util\Node $element
-	 * @return mixed null or \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
+	 * @return mixed null or \sli_tom\util\Node $element
 	 */
-	public function addBefore($index, \sli_dom\util\Node &$element) {
+	public function addBefore($index, \sli_tom\util\Node &$element) {
 		if (is_object($index)) {
 			$index = $this->indexOf($index);
 		}
@@ -251,12 +251,12 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Insert a child node
 	 *
-	 * @param \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
 	 * @param string $where
 	 * @param mixed $index
-	 * @return mixed null or \sli_dom\util\Node
+	 * @return mixed null or \sli_tom\util\Node
 	 */
-	public function insert(\sli_dom\util\Node &$element, $where = null, $index = null) {
+	public function insert(\sli_tom\util\Node &$element, $where = null, $index = null) {
 		if ($where) {
 			$method = $where == 'before' ? 'addBefore' : 'addAfter';
 			if (!isset($index)) {
@@ -271,12 +271,12 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Inject node as child node
 	 *
-	 * @param \sli_dom\util\Node $into
+	 * @param \sli_tom\util\Node $into
 	 * @param string $where
 	 * @param mixed $index
-	 * @return mixed null or \sli_dom\util\Node
+	 * @return mixed null or \sli_tom\util\Node
 	 */
-	public function inject(\sli_dom\util\Node &$into, $where = null, $index = null) {
+	public function inject(\sli_tom\util\Node &$into, $where = null, $index = null) {
 		if ($where) {
 			$method = $where == 'before' ? 'addBefore' : 'addAfter';
 			if (!isset($index)) {
@@ -291,11 +291,11 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Replace a child node with another node
 	 *
-	 * @param \sli_dom\util\Node $search
-	 * @param \sli_dom\util\Node $replace
-	 * @return mixed null or \sli_dom\util\Node
+	 * @param \sli_tom\util\Node $search
+	 * @param \sli_tom\util\Node $replace
+	 * @return mixed null or \sli_tom\util\Node
 	 */
-	public function replace(\sli_dom\util\Node &$search, \sli_dom\util\Node &$replace) {
+	public function replace(\sli_tom\util\Node &$search, \sli_tom\util\Node &$replace) {
 		if ($index = $this->indexOf($search)) {
 			return $this->addChild($replace, $index);
 		}
@@ -305,7 +305,7 @@ class Node extends \lithium\util\Collection {
 	 * Remove a child node
 	 *
 	 * @param mixed $index
-	 * @return mixed null or \sli_dom\util\Node $element
+	 * @return mixed null or \sli_tom\util\Node $element
 	 */
 	public function removeChild($index = null) {
 		if (!isset($index)) {
@@ -333,20 +333,20 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Lookup numerix index of a child node
 	 *
-	 * @param \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
 	 * @return mixed integer index or false if not found
 	 */
-	public function indexOf(\sli_dom\util\Node &$element) {
+	public function indexOf(\sli_tom\util\Node &$element) {
 		return array_search($element, $this->_data, true);
 	}
 
 	/**
 	 * Lookup numeric position of a child node
 	 *
-	 * @param \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
 	 * @return mixed integer index or false if not found
 	 */
-	public function position(\sli_dom\util\Node &$element) {
+	public function position(\sli_tom\util\Node &$element) {
 		if ($index = $this->indexOf($element)) {
 			return ++$index;
 		}
@@ -369,11 +369,11 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Internal insert handling
 	 *
-	 * @param \sli_dom\util\Node $element
+	 * @param \sli_tom\util\Node $element
 	 * @param integer $index
-	 * @return mixed boolean false or \sli_dom\util\Node $element
+	 * @return mixed boolean false or \sli_tom\util\Node $element
 	 */
-	protected function _insert(\sli_dom\util\Node &$element, $index) {
+	protected function _insert(\sli_tom\util\Node &$element, $index) {
 		if ($this->_final) {
 			return false;
 		}

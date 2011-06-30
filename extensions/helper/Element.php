@@ -6,9 +6,9 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\extensions\helper;
+namespace sli_tom\extensions\helper;
 
-use sli_dom\template\Element as ElementClass;
+use sli_tom\template\Element as ElementClass;
 
 class Element extends \lithium\template\Helper {
 
@@ -16,12 +16,12 @@ class Element extends \lithium\template\Helper {
 		return ElementClass::create($type, $params);
 	}
 
-	public function context(sli_dom\template\Element &$element, $context = null) {
+	public function context(sli_tom\template\Element &$element, $context = null) {
 		$context = is_object($context) ? $context : $this->_context;
 		$element->context($context);
 	}
 
-	public function render(sli_dom\template\Element &$element, $context = true) {
+	public function render(sli_tom\template\Element &$element, $context = true) {
 		if ($context) {
 			$this->context($element, $context);
 		}

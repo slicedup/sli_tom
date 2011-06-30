@@ -14,7 +14,7 @@ use lithium\core\Libraries;
 Libraries::paths(array(
 	'element' => array(
 		'{:library}\extensions\element\{:class}\{:namespace}\{:name}',
-		'{:library}\template\element\{:class}\{:namespace}\{:name}' => array('libraries' => 'sli_dom'),
+		'{:library}\template\element\{:class}\{:namespace}\{:name}' => array('libraries' => 'sli_tom'),
 	)
 ));
 

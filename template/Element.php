@@ -6,7 +6,7 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\template;
+namespace sli_tom\template;
 
 use lithium\core\Libraries;
 
@@ -15,7 +15,7 @@ use lithium\core\Libraries;
  * structure of nested Element nodes, and export these to rendered strings
  * for output in view context or elsewhere as required.
  */
-class Element extends \sli_dom\util\Node {
+class Element extends \sli_tom\util\Node {
 
 	/**
 	 * Formatters
@@ -23,9 +23,9 @@ class Element extends \sli_dom\util\Node {
 	 * @var array
 	 */
 	protected static $_formats = array(
-		'array' => 'sli_dom\template\Element::toArray',
-		'json' => 'sli_dom\template\Element::toJson',
-		'string' => 'sli_dom\template\Element::toString'
+		'array' => 'sli_tom\template\Element::toArray',
+		'json' => 'sli_tom\template\Element::toJson',
+		'string' => 'sli_tom\template\Element::toString'
 	);
 
 	/**
@@ -44,7 +44,7 @@ class Element extends \sli_dom\util\Node {
 	/**
 	 * Attributes
 	 *
-	 * @see sli_dom\template\Element::attributes()
+	 * @see sli_tom\template\Element::attributes()
 	 * @var array
 	 */
 	protected $_attributes = array();
@@ -52,7 +52,7 @@ class Element extends \sli_dom\util\Node {
 	/**
 	 * Params
 	 *
-	 * @see sli_dom\template\Element::params()
+	 * @see sli_tom\template\Element::params()
 	 * @var array
 	 */
 	protected $_params = array();
@@ -60,7 +60,7 @@ class Element extends \sli_dom\util\Node {
 	/**
 	 * Options
 	 *
-	 * @see sli_dom\template\Element::options()
+	 * @see sli_tom\template\Element::options()
 	 * @var array
 	 */
 	protected $_options = array();
@@ -95,7 +95,7 @@ class Element extends \sli_dom\util\Node {
 	 *
 	 * @param string $type element name
 	 * @param array $params arguments to pass to new element on construct
-	 * @return sli_dom\template\Element or null if not found
+	 * @return sli_tom\template\Element or null if not found
 	 */
 	public static function create($type = null, $params = array()){
 		if (!isset($type) || is_array($type)) {
@@ -286,7 +286,7 @@ class Element extends \sli_dom\util\Node {
 	}
 
 	/**
-	 * @see sli_dom\template\Element::toString()
+	 * @see sli_tom\template\Element::toString()
 	 */
 	public function __toString() {
 		try {

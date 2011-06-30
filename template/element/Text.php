@@ -6,8 +6,8 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\template\element;
+namespace sli_tom\template\element;
 
-class Text extends \sli_dom\template\element\Literal {}
+class Text extends \sli_tom\template\element\Literal {}
 
 ?>

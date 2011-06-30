@@ -6,9 +6,9 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\template\element;
+namespace sli_tom\template\element;
 
-class Literal extends \sli_dom\template\Element {
+class Literal extends \sli_tom\template\Element {
 
 	protected $_params = array(
 		'content' => ''

@@ -6,9 +6,9 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\template\element\form;
+namespace sli_tom\template\element\form;
 
-class Field extends \sli_dom\template\element\Form {
+class Field extends \sli_tom\template\element\Form {
 
 	protected $_method = 'field';
 

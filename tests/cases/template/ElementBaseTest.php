@@ -6,7 +6,7 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\tests\cases\template;
+namespace sli_tom\tests\cases\template;
 
 use lithium\action\Request;
 use lithium\net\http\Router;

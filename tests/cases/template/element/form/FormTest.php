@@ -6,12 +6,12 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\tests\cases\template\element\form;
+namespace sli_tom\tests\cases\template\element\form;
 
-use sli_dom\template\element\form\Form;
-use sli_dom\template\element\Literal;
+use sli_tom\template\element\form\Form;
+use sli_tom\template\element\Literal;
 
-class FormTest extends \sli_dom\tests\cases\template\ElementBaseTest {
+class FormTest extends \sli_tom\tests\cases\template\ElementBaseTest {
 
 	protected $model = 'lithium\tests\mocks\template\helper\MockFormPost';
 

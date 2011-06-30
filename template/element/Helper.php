@@ -6,7 +6,7 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\template\element;
+namespace sli_tom\template\element;
 
 /**
  * The `Helper` element class build upon the `Element` by also requiring
@@ -14,7 +14,7 @@ namespace sli_dom\template\element;
  * explicitly be called for rendering of the element by also setting a method
  * & configured params for invocation.
  */
-abstract class Helper extends \sli_dom\template\Element {
+abstract class Helper extends \sli_tom\template\Element {
 
 	/**
 	 * Auto config vars
@@ -34,8 +34,8 @@ abstract class Helper extends \sli_dom\template\Element {
 	 * Attributes are passed as the last argument to helper methods when a method
 	 * is configured for rendering. They are also combined with options.
 	 *
-	 * @see sli_dom\template\Element::attributes
-	 * @see sli_dom\template\element\Helper::attributes
+	 * @see sli_tom\template\Element::attributes
+	 * @see sli_tom\template\element\Helper::attributes
 	 * @var array
 	 */
 	protected $_attributes = array();
@@ -44,7 +44,7 @@ abstract class Helper extends \sli_dom\template\Element {
 	 * Params are passed as the arguments to helper methods when a method
 	 * is configured for rendering.
 	 *
-	 * @see sli_dom\template\Element::params
+	 * @see sli_tom\template\Element::params
 	 * @var array
 	 */
 	protected $_params = array();
@@ -54,7 +54,7 @@ abstract class Helper extends \sli_dom\template\Element {
 	 * a method is configured for rendering. This is to allow for configuration
 	 * of any non element attributes such as those that control rendering.
 	 *
-	 * @see sli_dom\template\Element::options
+	 * @see sli_tom\template\Element::options
 	 * @var array
 	 */
 	protected $_options = array();
@@ -77,7 +77,7 @@ abstract class Helper extends \sli_dom\template\Element {
 	 * Render element to string, loading helper, and calling configured helper
 	 * method for rendering if configured.
 	 *
-	 * @see sli_dom\template\Element::render()
+	 * @see sli_tom\template\Element::render()
 	 */
 	public function render($context = null) {
 		if ($context) {

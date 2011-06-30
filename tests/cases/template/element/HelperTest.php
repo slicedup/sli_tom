@@ -6,11 +6,11 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\tests\cases\template\element;
+namespace sli_tom\tests\cases\template\element;
 
-use sli_dom\tests\mocks\template\element\MockHelperElement;
+use sli_tom\tests\mocks\template\element\MockHelperElement;
 
-class HelperTest extends \sli_dom\tests\cases\template\ElementBaseTest {
+class HelperTest extends \sli_tom\tests\cases\template\ElementBaseTest {
 
 	public function testLoadHelper() {
 		$element = new MockHelperElement(array(

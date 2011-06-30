@@ -6,9 +6,9 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\tests\cases\util;
+namespace sli_tom\tests\cases\util;
 
-use sli_dom\util\Node;
+use sli_tom\util\Node;
 
 class NodeTest extends \lithium\test\Unit {
 

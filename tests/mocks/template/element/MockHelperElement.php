@@ -6,9 +6,9 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\tests\mocks\template\element;
+namespace sli_tom\tests\mocks\template\element;
 
-class MockHelperElement extends \sli_dom\template\element\Helper {
+class MockHelperElement extends \sli_tom\template\element\Helper {
 
 	protected $_helper = 'Html';
 

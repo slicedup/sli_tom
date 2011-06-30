@@ -6,16 +6,16 @@
  * @license 	http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace sli_dom\template\element;
+namespace sli_tom\template\element;
 
 class Form extends Helper {
 
 	protected $_classes = array(
-		'base' => 'sli_dom\template\element\Form',
-		'form' => 'sli_dom\template\element\form\Form',
-		'fieldset' => 'sli_dom\template\element\form\Fieldset',
-		'legend' => 'sli_dom\template\element\form\Legend',
-		'field' => 'sli_dom\template\element\form\Field',
+		'base' => 'sli_tom\template\element\Form',
+		'form' => 'sli_tom\template\element\form\Form',
+		'fieldset' => 'sli_tom\template\element\form\Fieldset',
+		'legend' => 'sli_tom\template\element\form\Legend',
+		'field' => 'sli_tom\template\element\form\Field',
 	);
 
 	protected $_helper = 'Form';
