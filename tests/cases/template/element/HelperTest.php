@@ -8,37 +8,9 @@
 
 namespace sli_dom\tests\cases\template\element;
 
-use lithium\test;
-
-use lithium\action\Request;
-use lithium\net\http\Router;
-use lithium\data\entity\Record;
-use lithium\tests\mocks\template\helper\MockFormRenderer;
 use sli_dom\tests\mocks\template\element\MockHelperElement;
 
-class HelperTest extends \lithium\test\Unit {
-
-	public function setUp() {
-		$this->_routes = Router::get();
-		Router::reset();
-		Router::connect('/{:controller}/{:action}/{:id}.{:type}', array('id' => null));
-		Router::connect('/{:controller}/{:action}/{:args}');
-
-		$request = new Request();
-		$request->params = array('controller' => 'posts', 'action' => 'index');
-		$request->persist = array('controller');
-
-		$this->context = new MockFormRenderer(compact('request'));
-	}
-
-	public function tearDown() {
-		Router::reset();
-
-		foreach ($this->_routes as $route) {
-			Router::connect($route);
-		}
-		unset($this->_routes, $this->context);
-	}
+class HelperTest extends \sli_dom\tests\cases\template\ElementBaseTest {
 
 	public function testLoadHelper() {
 		$element = new MockHelperElement(array(
