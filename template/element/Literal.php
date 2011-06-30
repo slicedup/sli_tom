@@ -14,13 +14,6 @@ class Literal extends \sli_dom\template\Element {
 		'content' => ''
 	);
 
-	protected function _init() {
-		parent::_init();
-		if (isset($this->_config['content'])) {
-			$this->_params['content'] = $this->_config['content'];
-		}
-	}
-
 	public function content($content = null) {
 		if (isset($content)) {
 			$this->_params['content'] = (string) $content;
@@ -29,7 +22,7 @@ class Literal extends \sli_dom\template\Element {
 	}
 
 	protected function _render() {
-		return $this->content();
+		return array('content' => $this->content());
 	}
 }
 
