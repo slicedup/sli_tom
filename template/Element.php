@@ -79,6 +79,17 @@ class Element extends \sli_dom\util\Node {
 	 */
 	protected $_template = '{:content}';
 
+	protected function _init() {
+		if (!empty($this->_params)) {
+			foreach ($this->_params as $param => &$value) {
+				if (isset($this->_config[$param])) {
+					$value = $this->_config[$param];
+				}
+			}
+		}
+		parent::_init();
+	}
+
 	/**
 	 * Lazy element loading/creation
 	 *
