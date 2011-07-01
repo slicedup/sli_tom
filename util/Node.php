@@ -194,6 +194,61 @@ class Node extends \lithium\util\Collection {
 	}
 
 	/**
+	 * Insert a child node
+	 *
+	 * @param \sli_tom\util\Node $element
+	 * @param string $where
+	 * @param mixed $index
+	 * @return mixed null or \sli_tom\util\Node
+	 */
+	public function insert(\sli_tom\util\Node &$element, $where = null, $index = null) {
+		switch($where){
+			case 'start':
+				$index = 0;
+				$method = 'addBefore';
+			break;
+			case 'before':
+				$index = isset($index) ? $index : 0;
+				$method = 'addBefore';
+			break;
+			case 'after':
+				$index = isset($index) ? $index : ($this->end() ? $this->key() : 0);
+				$method = 'addAfter';
+			break;
+			case 'end':
+			default:
+				return $this->addChild($element);
+			break;
+		}
+		return $this->$method($index, $element);
+	}
+
+	/**
+	 * Inject node as child node
+	 *
+	 * @param \sli_tom\util\Node $into
+	 * @param string $where
+	 * @param mixed $index
+	 * @return mixed null or \sli_tom\util\Node
+	 */
+	public function inject(\sli_tom\util\Node &$into, $where = null, $index = null) {
+		return $into->insert($this, $where, $index);
+	}
+
+	/**
+	 * Replace a child node with another node
+	 *
+	 * @param \sli_tom\util\Node $search
+	 * @param \sli_tom\util\Node $replace
+	 * @return mixed null or \sli_tom\util\Node
+	 */
+	public function replace(\sli_tom\util\Node &$search, \sli_tom\util\Node &$replace) {
+		if ($index = $this->indexOf($search)) {
+			return $this->addChild($replace, $index);
+		}
+	}
+
+	/**
 	 * Add child node.
 	 *
 	 * @param \sli_tom\util\Node $element
@@ -246,59 +301,6 @@ class Node extends \lithium\util\Collection {
 			return $this->_insert($element, $index);
 		}
 		return $this->addChild($element, $index);
-	}
-
-	/**
-	 * Insert a child node
-	 *
-	 * @param \sli_tom\util\Node $element
-	 * @param string $where
-	 * @param mixed $index
-	 * @return mixed null or \sli_tom\util\Node
-	 */
-	public function insert(\sli_tom\util\Node &$element, $where = null, $index = null) {
-		if ($where) {
-			$method = $where == 'before' ? 'addBefore' : 'addAfter';
-			if (!isset($index)) {
-				$index = $where == 'before' ? 0 : ($this->end() ? $this->key() : 0);
-			}
-			return $this->$method($index, $element);
-		} else {
-			return $this->addChild($element);
-		}
-	}
-
-	/**
-	 * Inject node as child node
-	 *
-	 * @param \sli_tom\util\Node $into
-	 * @param string $where
-	 * @param mixed $index
-	 * @return mixed null or \sli_tom\util\Node
-	 */
-	public function inject(\sli_tom\util\Node &$into, $where = null, $index = null) {
-		if ($where) {
-			$method = $where == 'before' ? 'addBefore' : 'addAfter';
-			if (!isset($index)) {
-				$index = $where == 'before' ? 0 : ($into->end() ? $into->key() : 0);
-			}
-			return $into->$method($index, $this);
-		}else {
-			return $into->addChild($this);
-		}
-	}
-
-	/**
-	 * Replace a child node with another node
-	 *
-	 * @param \sli_tom\util\Node $search
-	 * @param \sli_tom\util\Node $replace
-	 * @return mixed null or \sli_tom\util\Node
-	 */
-	public function replace(\sli_tom\util\Node &$search, \sli_tom\util\Node &$replace) {
-		if ($index = $this->indexOf($search)) {
-			return $this->addChild($replace, $index);
-		}
 	}
 
 	/**
