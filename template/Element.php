@@ -23,8 +23,6 @@ class Element extends \sli_tom\util\Node {
 	 * @var array
 	 */
 	protected static $_formats = array(
-		'array' => 'sli_tom\template\Element::toArray',
-		'json' => 'sli_tom\template\Element::toJson',
 		'string' => 'sli_tom\template\Element::toString'
 	);
 
@@ -241,37 +239,6 @@ class Element extends \sli_tom\util\Node {
 	 */
 	protected function _render() {
 		return array('content' => implode($this->invoke('render')));
-	}
-
-	/**
-	 * Export Element collection to array
-	 */
-	public static function toArray($data, array $options = array()){
-		$self = get_called_class();
-		if (!is_object($data) || !($data instanceOf $self)) {
-			return;
-		}
-		return $data->params() + array(
-			'options' => $data->attributes(),
-			'content' => $data->invoke('to', array('array'))
-		);
-	}
-
-	/**
-	 * Export Element collection to json
-	 */
-	public static function toJson($data, array $options = array()){
-		$self = get_called_class();
-		if (!is_object($data) || !($data instanceOf $self)) {
-			return;
-		}
-		$options += array(
-			'json' => 0
-		);
-		$jsonOptions = $options['json'];
-		unset($options['json']);
-		$data = static::toArray($data, $options);
-		return json_encode($data, $jsonOptions);
 	}
 
 	/**
