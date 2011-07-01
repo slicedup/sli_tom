@@ -85,9 +85,8 @@ abstract class Helper extends \sli_tom\template\Element {
 		}
 		$helper =& $this->_helper();
 		if ($this->_method) {
-			$options = $this->_attributes;
-			$params = array_values($this->_params);
-			$params[] = $options + $this->options();
+			$params = array_values($this->params());
+			$params[] = $this->attributes() + $this->options();
 			return $helper->invokeMethod($this->_method, $params);
 		}
 		return parent::render();
