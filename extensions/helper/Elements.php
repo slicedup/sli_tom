@@ -10,18 +10,22 @@ namespace sli_tom\extensions\helper;
 
 use sli_tom\template\Element as ElementClass;
 
-class Element extends \lithium\template\Helper {
+class Elements extends \lithium\template\Helper {
 
-	public function create($type, $params = array()){
-		return ElementClass::create($type, $params);
+	public function create($type, array $params = array(), $context = false){
+		$element = ElementClass::create($type, $params);
+		if ($context) {
+			$this->context($element);
+		}
+		return $element;
 	}
 
-	public function context(sli_tom\template\Element &$element, $context = null) {
+	public function context(\sli_tom\template\Element &$element, $context = null) {
 		$context = is_object($context) ? $context : $this->_context;
 		$element->context($context);
 	}
 
-	public function render(sli_tom\template\Element &$element, $context = true) {
+	public function render(\sli_tom\template\Element &$element, $context = true) {
 		if ($context) {
 			$this->context($element, $context);
 		}
