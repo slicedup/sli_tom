@@ -223,8 +223,8 @@ class Element extends \sli_tom\util\Node {
 			$this->context($context);
 		}
 		$context = $this->context(true);
-		$options = $this->_attributes;
-		$params = $this->_params;
+		$options = $this->attributes();
+		$params = $this->params();
 		$params += compact('options') + $this->_render();
 		return $context->helper('elements')->string($this->_template, $params, $this->options());
 	}
