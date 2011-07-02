@@ -132,21 +132,21 @@ class NodeTest extends \lithium\test\Unit {
 		$n5 = new Node();
 		$n1 = new Node(array('children' => array($n2, $n3, $n4, $n5)));
 
-		$this->assertIdentical($n2, $n1->removeChild(0));
+		$this->assertIdentical($n2, $n1->remove(0));
 		$this->assertFalse($n1->indexOf($n2));
 		$this->assertNull($n2->parent());
-		$this->assertIdentical($n5, $n1->removeChild());
+		$this->assertIdentical($n5, $n1->remove());
 		$this->assertFalse($n1->indexOf($n5));
 		$this->assertNull($n5->parent());
-		$this->assertIdentical($n4, $n1->removeChild(1));
+		$this->assertIdentical($n4, $n1->remove(1));
 		$this->assertFalse($n1->indexOf($n4));
 		$this->assertNull($n4->parent());
-		$this->assertIdentical($n3, $n1->removeChild($n3));
+		$this->assertIdentical($n3, $n1->remove($n3));
 		$this->assertFalse($n1->indexOf($n3));
 		$this->assertNull($n3->parent());
 
 		$n1 = new Node(array('children' => array($n2, $n3, $n4, $n5)));
-		$n1->removeChildren();
+		$n1->removeAll();
 		$this->assertFalse($n1->hasChildren());
 		$this->assertFalse($n1->indexOf($n2));
 		$this->assertNull($n2->parent());
@@ -187,12 +187,12 @@ class NodeTest extends \lithium\test\Unit {
 		$this->assertEqual(1, $n1->indexOf($n3));
 		$this->assertEqual(2, $n1->indexOf($n4));
 
-		$n1->removeChild(1);
+		$n1->remove(1);
 		$this->assertEqual(0, $n1->indexOf($n2));
 		$this->assertFalse($n1->indexOf($n3));
 		$this->assertEqual(1, $n1->indexOf($n4));
 
-		$n1->removeChild(0);
+		$n1->remove(0);
 		$this->assertFalse($n1->indexOf($n2));
 		$this->assertEqual(0, $n1->indexOf($n4));
 	}

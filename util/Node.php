@@ -325,7 +325,7 @@ class Node extends \lithium\util\Collection {
 	 * @param mixed $index
 	 * @return mixed null or \sli_tom\util\Node $element
 	 */
-	public function removeChild($index = null) {
+	public function remove($index = null) {
 		if (!isset($index)) {
 			$index = $this->count() -1;
 		} elseif (is_object($index)) {
@@ -343,7 +343,7 @@ class Node extends \lithium\util\Collection {
 	/**
 	 * Remove all children
 	 */
-	public function removeChildren() {
+	public function removeAll() {
 		$this->invoke('setParent');
 		$this->_data = array();
 	}
@@ -381,7 +381,7 @@ class Node extends \lithium\util\Collection {
 	 * ArrayAccess
 	 */
 	public function offsetUnset($offset) {
-		return $this->removeChild($offset);
+		return $this->remove($offset);
 	}
 
 	/**
