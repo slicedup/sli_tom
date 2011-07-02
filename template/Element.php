@@ -122,19 +122,6 @@ class Element extends \sli_tom\util\Node {
 		}
 	}
 
-	public function parent($filter = null) {
-		if (is_string($filter)) {
-			$class = static::$_types[$filter];
-			if ($this instanceOf $class) {
-				return $this;
-			}
-			$filter = function($self) use($class) {
-				return ($self instanceOf $class);
-			};
-		}
-		return parent::parent($filter);
-	}
-
 	/**
 	 * Get/Set attributes.
 	 *
@@ -279,6 +266,13 @@ class Element extends \sli_tom\util\Node {
 		} catch (\RuntimeException $e) {
 			return $e->getMessage();
 		}
+	}
+
+	protected static function _classFilter($class) {
+		if (isset(static::$_types[$class])) {
+			$class = static::$_types[$class];
+		}
+		return parent::_classFilter($class);
 	}
 }
 
