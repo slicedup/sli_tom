@@ -101,6 +101,9 @@ class Node extends \lithium\util\Collection {
 	 */
 	public function parent($filter = null) {
 		if ($filter && $this->_parent) {
+			if (is_string($filter)) {
+				$filter = static::_classFilter($filter);
+			}
 			return $this->parents()->first($filter);
 		}
 		return $this->_parent;
@@ -121,6 +124,9 @@ class Node extends \lithium\util\Collection {
 			}
 			$parents = new Collection(compact('data'));
 			if ($filter) {
+				if (is_string($filter)) {
+					$filter = static::_classFilter($filter);
+				}
 				$parents = $parents->find($filter);
 			}
 			return $parents;
@@ -149,6 +155,13 @@ class Node extends \lithium\util\Collection {
 		return !empty($this->_data);
 	}
 
+	public function first($filter = null) {
+		if (is_string($filter)) {
+			$filter = static::_classFilter($filter);
+		}
+		return parent::first($filter);
+	}
+
 	/**
 	 * Returns the last non-empty value in the collection after a filter is
 	 * applied, or forwards the collection and returns the last value.
@@ -159,6 +172,9 @@ class Node extends \lithium\util\Collection {
 	public function last($filter = null) {
 		if (!$filter) {
 			return $this->end();
+		}
+		if (is_string($filter)) {
+			$filter = static::_classFilter($filter);
 		}
 		$this->rewind();
 		while ($item = $this->prev()) {
@@ -385,6 +401,13 @@ class Node extends \lithium\util\Collection {
 		$this->_data = array_merge($start, $end);
 		$element->setParent($this);
 		return $element;
+	}
+
+	protected static function _classFilter($class) {
+		$filter = function($self) use($class) {
+			return ($self instanceOf $class);
+		};
+		return $filter;
 	}
 }
 
