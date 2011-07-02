@@ -10,38 +10,16 @@ namespace sli_tom\template\element;
 
 class Form extends Helper {
 
-	protected $_classes = array(
+	protected static $_types = array(
 		'base' => 'sli_tom\template\element\Form',
 		'form' => 'sli_tom\template\element\form\Form',
 		'fieldset' => 'sli_tom\template\element\form\Fieldset',
 		'legend' => 'sli_tom\template\element\form\Legend',
 		'field' => 'sli_tom\template\element\form\Field',
+		'submit' => 'sli_tom\template\element\form\Submit',
 	);
 
 	protected $_helper = 'Form';
-
-	protected function _init() {
-		$this->autoConfig['classes'] = 'merge';
-		parent::_init();
-	}
-
-	public function form() {
-		return $this->_parentType('form');
-	}
-
-	public function fieldset() {
-		return $this->_parentType('fieldset');
-	}
-
-	protected function _parentType($type = 'form') {
-		$class = $this->_classes[$type];
-		if (get_class($this) == $class) {
-			return $this;
-		}
-		return $this->parent(function($self) use($class) {
-			return get_class($self) == $class;
-		});
-	}
 }
 
 ?>

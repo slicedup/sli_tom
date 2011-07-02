@@ -74,22 +74,6 @@ class FormTest extends \sli_tom\tests\cases\template\ElementBaseTest {
 			'/form'
 		));
 	}
-
-	public function testFieldsetCreation() {
-		$context = $this->context;
-		$form = new Form(compact('context'));
-		$f = $form->addFieldset(array('legend' => 'I am Legend.'));
-		$result = $form->render();
-		$this->assertTags($result, array(
-			array('form' => array('action' => '/posts', 'method' => 'post')),
-			array('fieldset' => array()),
-			array('legend' => array()),
-			'I am Legend.',
-			'/legend',
-			'/fieldset',
-			'/form'
-		));
-	}
 }
 
 ?>

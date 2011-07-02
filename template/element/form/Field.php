@@ -12,7 +12,7 @@ class Field extends \sli_tom\template\element\Form {
 
 	protected $_method = 'field';
 
-	protected $params = array(
+	protected $_params = array(
 		'name' => null
 	);
 }

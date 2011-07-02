@@ -16,6 +16,19 @@ class Form extends \sli_tom\template\element\Form {
 		'binding' => null
 	);
 
+	protected function _init() {
+		parent::_init();
+		if (isset($this->_config['fieldsets'])) {
+			foreach($this->_config['fieldsets'] as $fieldset) {
+				if(!is_object($fieldset)) {
+					$fieldset = self::create('fieldset', $fieldset);
+				}
+				$this->insert($fieldset);
+			}
+			unset($this->_config['fieldsets']);
+		}
+	}
+
 	/**
 	 * Get/Set form binding
 	 *
@@ -28,25 +41,11 @@ class Form extends \sli_tom\template\element\Form {
 		return $this->_params['binding'];
 	}
 
-	public function addFieldset($config = array()) {
-		if (!is_object($config)) {
-			$fieldset = $this->createFieldset($config);
-		} else {
-			$fieldset = $config;
-		}
-		return $this->insert($fieldset);
-	}
-
-	public function createFieldset($config = array()) {
-		$class = $this->_classes['fieldset'];
-		return new $class($config);
-	}
-
 	public function render($context = null) {
 		$start = parent::render($context);
 		$context = $this->context(true);
 		$content = implode('', $this->_render());
-		$end = $context->helper('element')->string('form-end');
+		$end = $context->helper('elements')->string('form-end');
 		return "{$start}{$content}{$end}";
 	}
 }

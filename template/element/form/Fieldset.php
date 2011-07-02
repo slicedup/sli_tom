@@ -12,35 +12,35 @@ class Fieldset extends \sli_tom\template\element\Form {
 
 	protected $_template = 'fieldset';
 
-	protected $_params = array(
-		'legend' => null
-	);
-
-	public function addField($config = array()) {
-		if (!is_object($config)) {
-			$field = $this->createField($config);
-		} else {
-			$fieldset = $config;
+	protected function _init() {
+		$this->_config += array(
+			'legend' => null
+		);
+		parent::_init();
+		if (isset($this->_config['fields'])) {
+			foreach($this->_config['fields'] as $name => $field) {
+				if (!is_int($name)) {
+					$field = array(
+						'name' => $name,
+						'attributes' => $field
+					);
+				}
+				$this->insert(static::create('field', $field));
+			}
+			unset($this->_config['fields']);
 		}
-		return $this->insert($fieldset);
-	}
-
-	public function createField($config = array()) {
-		$class = $this->_classes['field'];
-		return new $class($config);
 	}
 
 	public function legend($content = null) {
 		if (isset($content)) {
-			$this->_params['legend'] = (string) $content;
+			$this->_config['legend'] = (string) $content;
 		}
-		return $this->_params['legend'];
+		return $this->_config['legend'];
 	}
 
 	protected function _render() {
 		if ($legend = $this->legend()) {
-			$class = $this->_classes['legend'];
-			$this->insert(new $class(array('content' => $legend)), 'before');
+			$this->insert(static::create('legend', array('content' => $legend)), 'start');
 			$this->legend(false);
 		}
 		$content = implode($this->invoke('render'));
