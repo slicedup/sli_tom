@@ -20,7 +20,7 @@ class NodeTest extends \lithium\test\Unit {
 		));
 		$n4 = new Node();
 		$n2->setParent($n1);
-		$n3->addChild($n4);
+		$n3->insert($n4);
 		$this->assertIdentical($n1, $n2->parent());
 		$this->assertIdentical($n1, $n2->root());
 		$this->assertIdentical($n1, $n3->root());
@@ -43,8 +43,8 @@ class NodeTest extends \lithium\test\Unit {
 		$n1 = new Node(array('children' => array($n2)));
 		$n3 = new Node();
 		$n4 = new Node();
-		$n1->addChild($n3);
-		$n1->addChild($n4);
+		$n1->insert($n3);
+		$n1->insert($n4);
 
 		$this->assertTrue($n1->hasChildren());
 		$this->assertIdentical($n1, $n2->parent());
@@ -62,24 +62,24 @@ class NodeTest extends \lithium\test\Unit {
 		$n4 = new Node();
 		$n5 = new Node();
 		$n6 = new Node();
-		$n1->addChild($n2);
+		$n1->insert($n2);
 		$this->assertEqual(0, $n1->indexOf($n2));
-		$this->assertIdentical($n3, $n1->addAfter($n2, $n3));
+		$this->assertIdentical($n3, $n1->insert($n3, 'after', $n2));
 		$this->assertEqual(0, $n1->indexOf($n2));
 		$this->assertEqual(1, $n1->indexOf($n3));
 
-		$this->assertIdentical($n4, $n1->addBefore($n2, $n4));
+		$this->assertIdentical($n4, $n1->insert($n4, 'before', $n2));
 		$this->assertEqual(0, $n1->indexOf($n4));
 		$this->assertEqual(1, $n1->indexOf($n2));
 		$this->assertEqual(2, $n1->indexOf($n3));
 
-		$this->assertIdentical($n5, $n1->addBefore($n3, $n5));
+		$this->assertIdentical($n5, $n1->insert($n5, 'before', $n3));
 		$this->assertEqual(0, $n1->indexOf($n4));
 		$this->assertEqual(1, $n1->indexOf($n2));
 		$this->assertEqual(2, $n1->indexOf($n5));
 		$this->assertEqual(3, $n1->indexOf($n3));
 
-		$this->assertIdentical($n6, $n1->addAfter($n3, $n6));
+		$this->assertIdentical($n6, $n1->insert($n6, 'after', $n3));
 		$this->assertEqual(0, $n1->indexOf($n4));
 		$this->assertEqual(1, $n1->indexOf($n2));
 		$this->assertEqual(2, $n1->indexOf($n5));
@@ -180,9 +180,9 @@ class NodeTest extends \lithium\test\Unit {
 		$n2 = new Node();
 		$n3 = new Node();
 		$n4 = new Node();
-		$n1->addChild($n2);
-		$n1->addChild($n3);
-		$n1->addChild($n4);
+		$n1->insert($n2);
+		$n1->insert($n3);
+		$n1->insert($n4);
 		$this->assertEqual(0, $n1->indexOf($n2));
 		$this->assertEqual(1, $n1->indexOf($n3));
 		$this->assertEqual(2, $n1->indexOf($n4));

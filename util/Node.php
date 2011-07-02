@@ -70,7 +70,7 @@ class Node extends \lithium\util\Collection {
 		}
 		if (isset($this->_config['children'])) {
 			while($child = array_shift($this->_config['children'])) {
-				$this->addChild($child);
+				$this->_addChild($child);
 			}
 		}
 		if (isset($this->_config['parent'])) {
@@ -142,7 +142,7 @@ class Node extends \lithium\util\Collection {
 	public function setParent(\sli_tom\util\Node $element = null) {
 		$this->_parent = $element;
 		if ($element && $element->indexOf($this) === false) {
-			$element->addChild($this);
+			$element->insert($this);
 		}
 	}
 
@@ -221,19 +221,19 @@ class Node extends \lithium\util\Collection {
 		switch($where){
 			case 'start':
 				$index = 0;
-				$method = 'addBefore';
+				$method = '_addBefore';
 			break;
 			case 'before':
 				$index = isset($index) ? $index : 0;
-				$method = 'addBefore';
+				$method = '_addBefore';
 			break;
 			case 'after':
 				$index = isset($index) ? $index : ($this->end() ? $this->key() : 0);
-				$method = 'addAfter';
+				$method = '_addAfter';
 			break;
 			case 'end':
 			default:
-				return $this->addChild($element);
+				return $this->_addChild($element);
 			break;
 		}
 		return $this->$method($index, $element);
@@ -260,63 +260,8 @@ class Node extends \lithium\util\Collection {
 	 */
 	public function replace(\sli_tom\util\Node $search, \sli_tom\util\Node $replace) {
 		if ($index = $this->indexOf($search)) {
-			return $this->addChild($replace, $index);
+			return $this->_addChild($replace, $index);
 		}
-	}
-
-	/**
-	 * Add child node.
-	 *
-	 * @param \sli_tom\util\Node $element
-	 * @param mixed $index
-	 * @return mixed null or \sli_tom\util\Node $element
-	 */
-	public function addChild(\sli_tom\util\Node $element, $index = null) {
-		if ($this->_final) {
-			return;
-		}
-		if (isset($index)) {
-			$this->_data[$index] =& $element;
-			$this->_data = array_values($this->_data);
-		} else {
-			$this->append($element);
-		}
-		$element->setParent($this);
-		return $element;
-	}
-
-	/**
-	 * Add child node after an existing child node
-	 *
-	 * @param mixed $index
-	 * @param \sli_tom\util\Node $element
-	 * @return mixed null or \sli_tom\util\Node $element
-	 */
-	public function addAfter($index, \sli_tom\util\Node $element) {
-		if (is_object($index)) {
-			$index = $this->indexOf($index);
-		}
-		if (isset($this->_data[$index])) {
-			return $this->_insert($element, ++$index);
-		}
-		return $this->addChild($element, $index);
-	}
-
-	/**
-	 * Add child node before an existing child node
-	 *
-	 * @param mixed $index
-	 * @param \sli_tom\util\Node $element
-	 * @return mixed null or \sli_tom\util\Node $element
-	 */
-	public function addBefore($index, \sli_tom\util\Node $element) {
-		if (is_object($index)) {
-			$index = $this->indexOf($index);
-		}
-		if (isset($this->_data[$index])) {
-			return $this->_insert($element, $index);
-		}
-		return $this->addChild($element, $index);
 	}
 
 	/**
@@ -382,6 +327,61 @@ class Node extends \lithium\util\Collection {
 	 */
 	public function offsetUnset($offset) {
 		return $this->remove($offset);
+	}
+
+	/**
+	 * Add child node.
+	 *
+	 * @param \sli_tom\util\Node $element
+	 * @param mixed $index
+	 * @return mixed null or \sli_tom\util\Node $element
+	 */
+	protected function _addChild(\sli_tom\util\Node $element, $index = null) {
+		if ($this->_final) {
+			return;
+		}
+		if (isset($index)) {
+			$this->_data[$index] =& $element;
+			$this->_data = array_values($this->_data);
+		} else {
+			$this->append($element);
+		}
+		$element->setParent($this);
+		return $element;
+	}
+
+	/**
+	 * Add child node after an existing child node
+	 *
+	 * @param mixed $index
+	 * @param \sli_tom\util\Node $element
+	 * @return mixed null or \sli_tom\util\Node $element
+	 */
+	protected function _addAfter($index, \sli_tom\util\Node $element) {
+		if (is_object($index)) {
+			$index = $this->indexOf($index);
+		}
+		if (isset($this->_data[$index])) {
+			return $this->_insert($element, ++$index);
+		}
+		return $this->addChild($element, $index);
+	}
+
+	/**
+	 * Add child node before an existing child node
+	 *
+	 * @param mixed $index
+	 * @param \sli_tom\util\Node $element
+	 * @return mixed null or \sli_tom\util\Node $element
+	 */
+	protected function _addBefore($index, \sli_tom\util\Node $element) {
+		if (is_object($index)) {
+			$index = $this->indexOf($index);
+		}
+		if (isset($this->_data[$index])) {
+			return $this->_insert($element, $index);
+		}
+		return $this->addChild($element, $index);
 	}
 
 	/**
