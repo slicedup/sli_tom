@@ -26,6 +26,8 @@ class Element extends \sli_tom\util\Node {
 		'string' => 'sli_tom\template\Element::toString'
 	);
 
+	protected static $_types = array();
+
 	/**
 	 * Auto config vars
 	 *
@@ -96,6 +98,9 @@ class Element extends \sli_tom\util\Node {
 	 * @return sli_tom\template\Element or null if not found
 	 */
 	public static function create($type = null, $params = array()){
+		if (isset(static::$_types[$type])) {
+			$type = static::$_types[$type];
+		}
 		if (!isset($type) || is_array($type)) {
 			$params = $type ?: $params;
 			$class = get_called_class();
@@ -103,8 +108,8 @@ class Element extends \sli_tom\util\Node {
 		}
 		$locate = 'element';
 		if (strpos($type, '\\') !== false) {
-			if (class_exists($type, false)) {
-				return new $class($params);
+			if (class_exists($type)) {
+				return new $type($params);
 			} else {
 				$path = explode('\\', $type);
 				$type = array_pop($path);
@@ -115,6 +120,19 @@ class Element extends \sli_tom\util\Node {
 		if($class = Libraries::locate($locate, $type)) {
 			return new $class($params);
 		}
+	}
+
+	public function parent($filter = null) {
+		if (is_string($filter)) {
+			$class = static::$_types[$filter];
+			if ($this instanceOf $class) {
+				return $this;
+			}
+			$filter = function($self) use($class) {
+				return ($self instanceOf $class);
+			};
+		}
+		return parent::parent($filter);
 	}
 
 	/**
