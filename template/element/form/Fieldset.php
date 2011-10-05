@@ -39,12 +39,9 @@ class Fieldset extends \sli_tom\template\element\Form {
 	}
 
 	protected function _render() {
-		if ($legend = $this->legend()) {
-			$this->insert(static::create('legend', array('content' => $legend)), 'start');
-			$this->legend(false);
-		}
-		$content = implode($this->invoke('render'));
-		return compact('content');
+		$raw = implode($this->invoke('render'));
+		$content = $this->legend();
+		return compact('content', 'raw');
 	}
 }
 
